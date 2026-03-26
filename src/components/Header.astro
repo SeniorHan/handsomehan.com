@@ -9,23 +9,23 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="border-b border-border">
+<header class="border-b border-border/50 backdrop-blur-md bg-bg/80 sticky top-0 z-40">
   <nav class="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold text-accent hover:text-accent-hover font-mono">
-      handsomehan
+    <a href="/" class="text-xl font-bold font-mono neon-text flicker text-accent">
+      &lt;handsomehan /&gt;
     </a>
     <div class="flex items-center gap-6">
       {navItems.map((item) => (
         <a
           href={item.href}
           class:list={[
-            'text-sm transition-colors',
+            'text-sm transition-all duration-300 font-mono',
             currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
-              ? 'text-accent'
-              : 'text-text-secondary hover:text-text',
+              ? 'text-accent neon-text'
+              : 'text-text-secondary hover:text-accent hover:neon-text',
           ]}
         >
-          {item.label}
+          [{item.label}]
         </a>
       ))}
       <Search />

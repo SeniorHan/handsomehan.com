@@ -1,14 +1,117 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0d1117;
-  --color-bg-card: #161b22;
-  --color-bg-hover: #1c2333;
-  --color-text: #e6edf3;
-  --color-text-secondary: #8b949e;
-  --color-accent: #58a6ff;
-  --color-accent-hover: #79b8ff;
-  --color-border: #30363d;
+  --color-bg: #0a0a0f;
+  --color-bg-card: #12121a;
+  --color-bg-hover: #1a1a2e;
+  --color-text: #e0e0ff;
+  --color-text-secondary: #7a7a9e;
+  --color-accent: #00f0ff;
+  --color-accent-hover: #7df9ff;
+  --color-accent-pink: #ff2d95;
+  --color-accent-purple: #bf5af2;
+  --color-border: #1e1e3a;
+  --color-glow: #00f0ff;
   --font-sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* 霓虹发光文字 */
+.neon-text {
+  text-shadow:
+    0 0 7px var(--color-glow),
+    0 0 10px var(--color-glow),
+    0 0 21px var(--color-glow),
+    0 0 42px var(--color-accent),
+    0 0 82px var(--color-accent);
+}
+
+.neon-text-pink {
+  text-shadow:
+    0 0 7px #ff2d95,
+    0 0 10px #ff2d95,
+    0 0 21px #ff2d95,
+    0 0 42px #ff2d95;
+}
+
+/* 霓虹边框发光 */
+.neon-border {
+  box-shadow:
+    0 0 5px rgba(0, 240, 255, 0.15),
+    inset 0 0 5px rgba(0, 240, 255, 0.05);
+  border-color: rgba(0, 240, 255, 0.3);
+}
+
+.neon-border:hover {
+  box-shadow:
+    0 0 10px rgba(0, 240, 255, 0.3),
+    0 0 20px rgba(0, 240, 255, 0.1),
+    inset 0 0 10px rgba(0, 240, 255, 0.05);
+  border-color: rgba(0, 240, 255, 0.6);
+}
+
+/* 渐变动画背景 */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.gradient-animate {
+  background: linear-gradient(270deg, #00f0ff, #bf5af2, #ff2d95, #00f0ff);
+  background-size: 300% 300%;
+  animation: gradient-shift 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 扫描线效果 */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 240, 255, 0.008) 2px,
+    rgba(0, 240, 255, 0.008) 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* 网格背景 */
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* 闪烁动画 */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.7; }
+  94% { opacity: 1; }
+  96% { opacity: 0.8; }
+  97% { opacity: 1; }
+}
+
+.flicker {
+  animation: flicker 4s infinite;
+}
+
+/* 脉冲发光 */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(0, 240, 255, 0.2); }
+  50% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), 0 0 30px rgba(0, 240, 255, 0.1); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
 }

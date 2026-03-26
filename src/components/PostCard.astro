@@ -16,16 +16,19 @@ const formattedDate = date.toLocaleDateString('zh-CN', {
 ---
 
 <a href={`/blog/${slug}`} class="block group">
-  <article class="bg-bg-card border border-border rounded-lg p-5 transition-colors group-hover:border-accent/50 group-hover:bg-bg-hover">
-    <h2 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors">{title}</h2>
-    <p class="text-text-secondary text-sm mb-3 line-clamp-2">{description}</p>
-    <div class="flex items-center gap-3 text-xs text-text-secondary">
+  <article class="bg-bg-card border border-border/50 rounded-lg p-5 transition-all duration-300 neon-border group-hover:bg-bg-hover relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="flex items-center gap-2 text-xs text-text-secondary font-mono mb-2">
+      <span class="text-accent-pink">&gt;</span>
       <time datetime={date.toISOString()}>{formattedDate}</time>
+      <span class="text-border">|</span>
       <div class="flex gap-2">
         {tags.map((tag) => (
-          <span class="text-accent/70">#{tag}</span>
+          <span class="text-accent-purple">#{tag}</span>
         ))}
       </div>
     </div>
+    <h2 class="text-lg font-semibold mb-2 group-hover:text-accent transition-colors font-mono">{title}</h2>
+    <p class="text-text-secondary text-sm line-clamp-2">{description}</p>
   </article>
 </a>

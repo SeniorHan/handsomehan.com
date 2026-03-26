@@ -9,15 +9,28 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 ---
 
 <Base title="首页">
-  <section class="mb-12">
-    <h1 class="text-3xl font-bold mb-2">Hey, I'm <span class="text-accent">handsomehan</span></h1>
-    <p class="text-text-secondary leading-7">
-      欢迎来到我的技术博客，这里记录我在技术领域的探索和思考。
+  <section class="mb-16 pt-8">
+    <p class="text-accent font-mono text-sm mb-4 flicker">// welcome.init()</p>
+    <h1 class="text-4xl font-bold mb-4 font-mono">
+      <span class="gradient-animate">handsomehan</span>
+    </h1>
+    <p class="text-text-secondary leading-7 border-l-2 border-accent-pink pl-4">
+      欢迎来到我的赛博空间，这里记录我在技术领域的探索和思考。
     </p>
+    <div class="mt-6 flex gap-3">
+      <a href="/blog" class="neon-border border rounded-lg px-4 py-2 text-sm font-mono text-accent hover:bg-accent/10 transition-all duration-300">
+        &gt; ls ./blog
+      </a>
+      <a href="/about" class="border border-accent-pink/30 rounded-lg px-4 py-2 text-sm font-mono text-accent-pink hover:bg-accent-pink/10 transition-all duration-300">
+        &gt; cat ./about
+      </a>
+    </div>
   </section>
 
   <section>
-    <h2 class="text-xl font-semibold mb-6">最新文章</h2>
+    <h2 class="text-xl font-semibold mb-6 font-mono">
+      <span class="text-accent-pink">&gt;</span> 最新文章
+    </h2>
     <div class="flex flex-col gap-4">
       {posts.map((post) => (
         <PostCard

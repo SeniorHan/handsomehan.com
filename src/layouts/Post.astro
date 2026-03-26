@@ -20,37 +20,37 @@ const formattedDate = date.toLocaleDateString('zh-CN', {
 <Base title={title} description={description}>
   <article>
     <header class="mb-8">
-      <h1 class="text-3xl font-bold mb-3">{title}</h1>
-      <div class="flex items-center gap-4 text-text-secondary text-sm">
-        <time datetime={date.toISOString()}>{formattedDate}</time>
-        <div class="flex gap-2">
-          {tags.map((tag) => (
-            <a href={`/tags/${tag}`} class="text-accent hover:text-accent-hover">#{tag}</a>
-          ))}
-        </div>
+      <p class="text-accent-pink font-mono text-xs mb-3">// {formattedDate}</p>
+      <h1 class="text-3xl font-bold mb-4 font-mono gradient-animate">{title}</h1>
+      <div class="flex gap-2 font-mono text-sm">
+        {tags.map((tag) => (
+          <a href={`/tags/${tag}`} class="text-accent-purple hover:text-accent transition-colors">#{tag}</a>
+        ))}
       </div>
+      <div class="h-[1px] mt-6 bg-gradient-to-r from-accent via-accent-pink to-accent-purple"></div>
     </header>
     <div class="prose prose-invert max-w-none
-      [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-text
-      [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:text-text
+      [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-text [&_h2]:font-mono
+      [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:text-text [&_h3]:font-mono
       [&_p]:leading-7 [&_p]:mb-4 [&_p]:text-text-secondary
       [&_a]:text-accent [&_a]:hover:text-accent-hover [&_a]:underline
-      [&_code]:bg-bg-card [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono
-      [&_pre]:bg-bg-card [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:mb-4
-      [&_pre_code]:bg-transparent [&_pre_code]:p-0
+      [&_code]:bg-bg-card [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono [&_code]:text-accent-pink
+      [&_pre]:bg-bg-card [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:mb-4 [&_pre]:border [&_pre]:border-border/50
+      [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-text
       [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:text-text-secondary
       [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:text-text-secondary
       [&_li]:mb-1
-      [&_blockquote]:border-l-4 [&_blockquote]:border-accent [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-text-secondary
+      [&_blockquote]:border-l-2 [&_blockquote]:border-accent-pink [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-text-secondary
       [&_img]:rounded-lg [&_img]:mx-auto
-      [&_hr]:border-border [&_hr]:my-8
+      [&_hr]:border-border/50 [&_hr]:my-8
       [&_table]:w-full [&_table]:mb-4
-      [&_th]:bg-bg-card [&_th]:px-4 [&_th]:py-2 [&_th]:text-left [&_th]:border [&_th]:border-border
-      [&_td]:px-4 [&_td]:py-2 [&_td]:border [&_td]:border-border
+      [&_th]:bg-bg-card [&_th]:px-4 [&_th]:py-2 [&_th]:text-left [&_th]:border [&_th]:border-border/50
+      [&_td]:px-4 [&_td]:py-2 [&_td]:border [&_td]:border-border/50
+      [&_strong]:text-accent
     ">
       <slot />
     </div>
-    <hr class="border-border my-12" />
+    <div class="h-[1px] my-12 bg-gradient-to-r from-transparent via-accent-pink/50 to-transparent"></div>
     <Giscus />
   </article>
 </Base>

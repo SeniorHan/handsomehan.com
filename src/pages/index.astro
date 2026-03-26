@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 10);
+---
+
+<Base title="首页">
+  <section class="mb-12">
+    <h1 class="text-3xl font-bold mb-2">Hey, I'm <span class="text-accent">handsomehan</span></h1>
+    <p class="text-text-secondary leading-7">
+      欢迎来到我的技术博客，这里记录我在技术领域的探索和思考。
+    </p>
+  </section>
+
+  <section>
+    <h2 class="text-xl font-semibold mb-6">最新文章</h2>
+    <div class="flex flex-col gap-4">
+      {posts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          date={post.data.date}
+          description={post.data.description}
+          tags={post.data.tags}
+          slug={post.id}
+        />
+      ))}
+    </div>
+  </section>
+</Base>

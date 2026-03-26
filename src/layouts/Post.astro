@@ -1,0 +1,56 @@
+---
+import Base from './Base.astro';
+import Giscus from '../components/Giscus.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  description: string;
+  tags: string[];
+}
+
+const { title, date, description, tags } = Astro.props;
+const formattedDate = date.toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base title={title} description={description}>
+  <article>
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold mb-3">{title}</h1>
+      <div class="flex items-center gap-4 text-text-secondary text-sm">
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+        <div class="flex gap-2">
+          {tags.map((tag) => (
+            <a href={`/tags/${tag}`} class="text-accent hover:text-accent-hover">#{tag}</a>
+          ))}
+        </div>
+      </div>
+    </header>
+    <div class="prose prose-invert max-w-none
+      [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:text-text
+      [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:text-text
+      [&_p]:leading-7 [&_p]:mb-4 [&_p]:text-text-secondary
+      [&_a]:text-accent [&_a]:hover:text-accent-hover [&_a]:underline
+      [&_code]:bg-bg-card [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-sm [&_code]:font-mono
+      [&_pre]:bg-bg-card [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:mb-4
+      [&_pre_code]:bg-transparent [&_pre_code]:p-0
+      [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:text-text-secondary
+      [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:text-text-secondary
+      [&_li]:mb-1
+      [&_blockquote]:border-l-4 [&_blockquote]:border-accent [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-text-secondary
+      [&_img]:rounded-lg [&_img]:mx-auto
+      [&_hr]:border-border [&_hr]:my-8
+      [&_table]:w-full [&_table]:mb-4
+      [&_th]:bg-bg-card [&_th]:px-4 [&_th]:py-2 [&_th]:text-left [&_th]:border [&_th]:border-border
+      [&_td]:px-4 [&_td]:py-2 [&_td]:border [&_td]:border-border
+    ">
+      <slot />
+    </div>
+    <hr class="border-border my-12" />
+    <Giscus />
+  </article>
+</Base>

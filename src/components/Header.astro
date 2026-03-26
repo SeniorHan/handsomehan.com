@@ -19,13 +19,13 @@ const currentPath = Astro.url.pathname;
         <a
           href={item.href}
           class:list={[
-            'text-sm transition-all duration-300 font-mono',
+            'text-sm transition-all duration-300 relative py-1',
             currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
-              ? 'text-accent neon-text'
-              : 'text-text-secondary hover:text-accent hover:neon-text',
+              ? 'text-accent after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-accent after:shadow-[0_0_8px_var(--color-accent)]'
+              : 'text-text-secondary hover:text-accent',
           ]}
         >
-          [{item.label}]
+          {item.label}
         </a>
       ))}
       <Search />

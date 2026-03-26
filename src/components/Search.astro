@@ -4,24 +4,33 @@
 <div id="search-container" class="relative">
   <button
     id="search-btn"
-    class="text-text-secondary hover:text-text transition-colors text-sm flex items-center gap-1"
+    class="text-text-secondary hover:text-accent transition-colors text-sm flex items-center gap-1.5"
     aria-label="搜索"
   >
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="11" cy="11" r="8"></circle>
       <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
     </svg>
-    搜索
+    <span class="hidden sm:inline">搜索</span>
+    <kbd class="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] bg-bg-card border border-border rounded text-text-secondary">
+      <span>⌘</span>K
+    </kbd>
   </button>
 </div>
 
 <div
   id="search-modal"
-  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm"
+  class="fixed inset-0 z-50 hidden items-start justify-center pt-[20vh] bg-black/70 backdrop-blur-md"
 >
-  <div class="bg-bg-card border border-border rounded-xl w-full max-w-lg mx-4 p-4 shadow-2xl">
-    <div id="pagefind-search" class="[&_input]:bg-bg [&_input]:border [&_input]:border-border [&_input]:rounded-lg [&_input]:px-4 [&_input]:py-2 [&_input]:text-text [&_input]:w-full [&_input]:outline-none [&_input]:focus:border-accent [&_.pagefind-ui__result-link]:text-accent [&_.pagefind-ui__result-excerpt]:text-text-secondary [&_.pagefind-ui__result]:border-b [&_.pagefind-ui__result]:border-border [&_.pagefind-ui__result]:py-3"></div>
-    <p class="text-text-secondary text-xs mt-3 text-center">按 ESC 关闭</p>
+  <div class="bg-bg-card border border-border/50 rounded-2xl w-full max-w-xl mx-4 shadow-[0_0_40px_rgba(0,240,255,0.08)] overflow-hidden neon-border">
+    <div id="pagefind-search"></div>
+    <div class="px-4 py-2 border-t border-border/30 flex items-center justify-between text-[11px] text-text-secondary">
+      <span>输入关键词搜索文章</span>
+      <div class="flex items-center gap-2">
+        <kbd class="px-1.5 py-0.5 bg-bg border border-border rounded text-[10px]">ESC</kbd>
+        <span>关闭</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -42,6 +51,7 @@
           new PagefindUI({
             element: '#pagefind-search',
             showSubResults: true,
+            showImages: false,
             translations: {
               placeholder: '搜索文章...',
               zero_results: '没有找到相关文章',
@@ -54,7 +64,7 @@
         document.head.appendChild(script);
       } else {
         var input = document.querySelector('#pagefind-search input');
-        if (input) input.focus();
+        if (input) { input.focus(); input.select(); }
       }
     }
 
@@ -79,4 +89,76 @@
   initSearch();
 </script>
 
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<style is:inline>
+  .pagefind-ui__search-input {
+    background: #0a0a0f !important;
+    border: 1px solid #1e1e3a !important;
+    border-radius: 0 !important;
+    padding: 16px 20px 16px 48px !important;
+    font-size: 16px !important;
+    color: #e0e0ff !important;
+    outline: none !important;
+    width: 100% !important;
+    box-shadow: none !important;
+  }
+  .pagefind-ui__search-input:focus {
+    border-color: #00f0ff !important;
+    box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.3) !important;
+  }
+  .pagefind-ui__search-input::placeholder {
+    color: #7a7a9e !important;
+  }
+  .pagefind-ui__search-clear {
+    color: #7a7a9e !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+  .pagefind-ui__form::before {
+    background-color: #7a7a9e !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+  .pagefind-ui__results-area {
+    margin-top: 0 !important;
+    padding: 0 !important;
+  }
+  .pagefind-ui__results {
+    max-height: 40vh !important;
+    overflow-y: auto !important;
+    padding: 8px 16px !important;
+  }
+  .pagefind-ui__result {
+    border-bottom: 1px solid #1e1e3a !important;
+    padding: 12px 4px !important;
+  }
+  .pagefind-ui__result:last-child {
+    border-bottom: none !important;
+  }
+  .pagefind-ui__result-link {
+    color: #00f0ff !important;
+    font-weight: 500 !important;
+  }
+  .pagefind-ui__result-link:hover {
+    color: #7df9ff !important;
+  }
+  .pagefind-ui__result-excerpt {
+    color: #7a7a9e !important;
+    font-size: 13px !important;
+  }
+  mark.pagefind-ui__result-highlight {
+    background: rgba(0, 240, 255, 0.15) !important;
+    color: #00f0ff !important;
+  }
+  .pagefind-ui__message {
+    color: #7a7a9e !important;
+    padding: 16px !important;
+  }
+  .pagefind-ui__button {
+    color: #00f0ff !important;
+    background: #12121a !important;
+    border: 1px solid #1e1e3a !important;
+  }
+  .pagefind-ui__button:hover {
+    border-color: #00f0ff !important;
+  }
+</style>

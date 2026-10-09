@@ -11,16 +11,19 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header class="border-b border-border/50 backdrop-blur-md bg-bg/80 sticky top-0 z-40">
-  <nav class="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold font-mono neon-text flicker text-accent">
+  <nav class="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between gap-3 overflow-hidden">
+    <a
+      href="/"
+      class="text-base sm:text-xl font-bold font-mono neon-text flicker text-accent whitespace-nowrap shrink-0"
+    >
       &lt;handsomehan /&gt;
     </a>
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-3 sm:gap-6 min-w-0">
       {navItems.map((item) => (
         <a
           href={item.href}
           class:list={[
-            'text-sm transition-all duration-300 relative py-1',
+            'text-sm transition-all duration-300 relative py-1 whitespace-nowrap shrink-0',
             currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
               ? 'text-accent after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-accent after:shadow-[0_0_8px_var(--color-accent)]'
               : 'text-text-secondary hover:text-accent',

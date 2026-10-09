@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="页面未找到 - 404">
+  <div class="flex flex-col items-center justify-center text-center py-20 font-mono">
+    <p class="text-text-secondary text-sm mb-4">$ cat ./<span class="text-accent-pink">404</span></p>
+    <h1 class="text-6xl sm:text-8xl font-bold neon-text-pink text-accent-pink mb-6">404</h1>
+    <p class="text-xl text-text mb-2">页面不存在</p>
+    <p class="text-text-secondary text-sm mb-8">
+      cat: ./<span id="err-path">该路径</span>: No such file or directory
+    </p>
+    <a
+      href="/"
+      class="px-6 py-2 border border-border rounded neon-border text-accent hover:bg-bg-hover transition-colors"
+    >
+      &gt; 返回首页
+    </a>
+  </div>
+</Base>
+
+<script>
+  const path = window.location.pathname;
+  const el = document.getElementById('err-path');
+  if (el && path && path !== '/') el.textContent = path;
+</script>

@@ -1,5 +1,6 @@
 ---
 import Search from './Search.astro';
+import ThemeToggle from './ThemeToggle.astro';
 const navItems = [
   { label: '首页', href: '/' },
   { label: '博客', href: '/blog' },
@@ -28,6 +29,7 @@ const currentPath = Astro.url.pathname;
           {item.label}
         </a>
       ))}
+      <ThemeToggle />
       <Search />
     </div>
   </nav>

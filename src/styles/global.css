@@ -1,53 +1,101 @@
 @import "tailwindcss";
 
-@theme {
-  --color-bg: #0a0a0f;
-  --color-bg-card: #12121a;
-  --color-bg-hover: #1a1a2e;
-  --color-text: #e0e0ff;
-  --color-text-secondary: #7a7a9e;
-  --color-accent: #00f0ff;
-  --color-accent-hover: #7df9ff;
-  --color-accent-pink: #ff2d95;
-  --color-accent-purple: #bf5af2;
-  --color-border: #1e1e3a;
-  --color-glow: #00f0ff;
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ── 设计 token：运行时 CSS 变量双层结构 ── */
+:root {
+  color-scheme: light;
+  /* 浅色（日间）主题 */
+  --bg: #f5f6fa;
+  --bg-card: #ffffff;
+  --bg-hover: #eceef5;
+  --text: #1a1a24;
+  --text-secondary: #5a5a72;
+  --border: #d8dae5;
+  /* accent 加深变体，保证浅色底对比度 ≥ 4.5:1 (WCAG AA) */
+  --accent: #007a8c;
+  --accent-hover: #005f6e;
+  --accent-pink: #d81b6e;
+  --accent-purple: #8e34d1;
+  --glow: #007a8c;
+  /* 霓虹特效强度：浅色下关闭/弱化发光 */
+  --fx-strength: 0;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  /* 暗色主题：原有赛博朋克配色原样迁入（品牌基线） */
+  --bg: #0a0a0f;
+  --bg-card: #12121a;
+  --bg-hover: #1a1a2e;
+  --text: #e0e0ff;
+  --text-secondary: #7a7a9e;
+  --border: #1e1e3a;
+  --accent: #00f0ff;
+  --accent-hover: #7df9ff;
+  --accent-pink: #ff2d95;
+  --accent-purple: #bf5af2;
+  --glow: #00f0ff;
+  --fx-strength: 1;
+}
+
+/* Tailwind v4 @theme inline：utility（bg-bg 等）直接引用运行时变量 */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-card: var(--bg-card);
+  --color-bg-hover: var(--bg-hover);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-purple: var(--accent-purple);
+  --color-border: var(--border);
+  --color-glow: var(--glow);
   --font-sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
+/* ── 霓虹特效（受 --fx-strength 主题守卫控制） ── */
+
 /* 霓虹发光文字 */
 .neon-text {
   text-shadow:
-    0 0 7px var(--color-glow),
-    0 0 10px var(--color-glow),
-    0 0 21px var(--color-glow),
-    0 0 42px var(--color-accent),
-    0 0 82px var(--color-accent);
+    0 0 7px var(--glow),
+    0 0 10px var(--glow),
+    0 0 21px var(--glow),
+    0 0 42px var(--accent),
+    0 0 82px var(--accent);
 }
 
 .neon-text-pink {
   text-shadow:
-    0 0 7px #ff2d95,
-    0 0 10px #ff2d95,
-    0 0 21px #ff2d95,
-    0 0 42px #ff2d95;
+    0 0 7px var(--accent-pink),
+    0 0 10px var(--accent-pink),
+    0 0 21px var(--accent-pink),
+    0 0 42px var(--accent-pink);
+}
+
+/* 浅色主题下关闭文字发光（避免"脏光晕"） */
+[data-theme="light"] .neon-text,
+[data-theme="light"] .neon-text-pink {
+  text-shadow: none;
 }
 
 /* 霓虹边框发光 */
 .neon-border {
   box-shadow:
-    0 0 5px rgba(0, 240, 255, 0.15),
-    inset 0 0 5px rgba(0, 240, 255, 0.05);
-  border-color: rgba(0, 240, 255, 0.3);
+    0 0 5px rgba(0, 240, 255, calc(0.15 * var(--fx-strength))),
+    inset 0 0 5px rgba(0, 240, 255, calc(0.05 * var(--fx-strength)));
+  border-color: var(--border);
 }
 
 .neon-border:hover {
   box-shadow:
-    0 0 10px rgba(0, 240, 255, 0.3),
-    0 0 20px rgba(0, 240, 255, 0.1),
-    inset 0 0 10px rgba(0, 240, 255, 0.05);
-  border-color: rgba(0, 240, 255, 0.6);
+    0 0 10px rgba(0, 240, 255, calc(0.3 * var(--fx-strength))),
+    0 0 20px rgba(0, 240, 255, calc(0.1 * var(--fx-strength))),
+    inset 0 0 10px rgba(0, 240, 255, calc(0.05 * var(--fx-strength)));
+  border-color: var(--accent);
 }
 
 /* 渐变动画背景 */
@@ -57,7 +105,7 @@
 }
 
 .gradient-animate {
-  background: linear-gradient(270deg, #00f0ff, #bf5af2, #ff2d95, #00f0ff);
+  background: linear-gradient(270deg, var(--accent), var(--accent-purple), var(--accent-pink), var(--accent));
   background-size: 300% 300%;
   animation: gradient-shift 6s ease infinite;
   -webkit-background-clip: text;
@@ -65,7 +113,7 @@
   background-clip: text;
 }
 
-/* 扫描线效果 */
+/* 扫描线效果（浅色下关闭） */
 .scanlines::after {
   content: '';
   position: fixed;
@@ -77,8 +125,8 @@
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 240, 255, 0.008) 2px,
-    rgba(0, 240, 255, 0.008) 4px
+    rgba(0, 240, 255, calc(0.008 * var(--fx-strength))) 2px,
+    rgba(0, 240, 255, calc(0.008 * var(--fx-strength))) 4px
   );
   pointer-events: none;
   z-index: 100;
@@ -87,12 +135,12 @@
 /* 网格背景 */
 .cyber-grid {
   background-image:
-    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 240, 255, calc(0.03 * var(--fx-strength))) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, calc(0.03 * var(--fx-strength))) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
-/* 闪烁动画 */
+/* 闪烁动画（浅色下关闭） */
 @keyframes flicker {
   0%, 100% { opacity: 1; }
   92% { opacity: 1; }
@@ -106,12 +154,36 @@
   animation: flicker 4s infinite;
 }
 
+[data-theme="light"] .flicker {
+  animation: none;
+}
+
 /* 脉冲发光 */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 5px rgba(0, 240, 255, 0.2); }
-  50% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), 0 0 30px rgba(0, 240, 255, 0.1); }
+  0%, 100% { box-shadow: 0 0 5px rgba(0, 240, 255, calc(0.2 * var(--fx-strength))); }
+  50% { box-shadow: 0 0 15px rgba(0, 240, 255, calc(0.4 * var(--fx-strength))), 0 0 30px rgba(0, 240, 255, calc(0.1 * var(--fx-strength))); }
 }
 
 .pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
 }
+
+/* ── shiki 双主题代码高亮（astro.config 双 themes 输出 --shiki-dark 变量） ── */
+[data-theme="dark"] .astro-code,
+[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* ── 主题切换按钮：按当前选择显示对应图标 ── */
+#theme-toggle .theme-icon-light,
+#theme-toggle .theme-icon-dark,
+#theme-toggle .theme-icon-system {
+  display: none;
+}
+#theme-toggle[data-choice="light"] .theme-icon-light { display: inline; }
+#theme-toggle[data-choice="dark"] .theme-icon-dark { display: inline; }
+#theme-toggle[data-choice="system"] .theme-icon-system { display: inline; }

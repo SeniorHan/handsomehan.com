@@ -29,9 +29,21 @@
       'https://giscus.app',
     );
   }
+  // 首次加载：iframe 建立后立即按当前主题同步一次（脚本标签固定 dark_dimmed，light 用户否则首屏仍为暗色）
+  document.addEventListener(
+    'load',
+    (e) => {
+      if ((e.target as HTMLElement).classList?.contains('giscus-frame')) {
+        syncGiscusTheme();
+      }
+    },
+    true,
+  );
   const observer = new MutationObserver(syncGiscusTheme);
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ['data-theme'],
   });
+  // 兜底：iframe 已在监听器注册前完成加载的情况
+  document.querySelector('iframe.giscus-frame') && syncGiscusTheme();
 </script>

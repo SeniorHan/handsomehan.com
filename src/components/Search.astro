@@ -91,30 +91,30 @@
 
 <style is:inline>
   .pagefind-ui__search-input {
-    background: #0a0a0f !important;
-    border: 1px solid #1e1e3a !important;
+    background: var(--bg) !important;
+    border: 1px solid var(--border) !important;
     border-radius: 0 !important;
     padding: 16px 20px 16px 48px !important;
     font-size: 16px !important;
-    color: #e0e0ff !important;
+    color: var(--text) !important;
     outline: none !important;
     width: 100% !important;
     box-shadow: none !important;
   }
   .pagefind-ui__search-input:focus {
-    border-color: #00f0ff !important;
-    box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.3) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 1px var(--accent) !important;
   }
   .pagefind-ui__search-input::placeholder {
-    color: #7a7a9e !important;
+    color: var(--text-secondary) !important;
   }
   .pagefind-ui__search-clear {
-    color: #7a7a9e !important;
+    color: var(--text-secondary) !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
   }
   .pagefind-ui__form::before {
-    background-color: #7a7a9e !important;
+    background-color: var(--text-secondary) !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
   }
@@ -128,35 +128,35 @@
     padding: 8px 16px !important;
   }
   .pagefind-ui__result {
-    border-bottom: 1px solid #1e1e3a !important;
+    border-bottom: 1px solid var(--border) !important;
     padding: 12px 4px !important;
   }
   .pagefind-ui__result:last-child {
     border-bottom: none !important;
   }
   .pagefind-ui__result-link {
-    color: #00f0ff !important;
+    color: var(--accent) !important;
     font-weight: 500 !important;
   }
   .pagefind-ui__result-link:hover {
-    color: #7df9ff !important;
+    color: var(--accent-hover) !important;
   }
   .pagefind-ui__result-excerpt {
-    color: #7a7a9e !important;
+    color: var(--text-secondary) !important;
     font-size: 13px !important;
   }
   mark.pagefind-ui__result-highlight {
-    background: rgba(0, 240, 255, 0.15) !important;
-    color: #00f0ff !important;
+    background: var(--bg-hover) !important;
+    color: var(--accent) !important;
   }
   .pagefind-ui__message {
-    color: #7a7a9e !important;
+    color: var(--text-secondary) !important;
     padding: 16px !important;
   }
   .pagefind-ui__button {
-    color: #e0e0ff !important;
-    background: #12121a !important;
-    border: 1px solid #1e1e3a !important;
+    color: var(--text) !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
     border-radius: 8px !important;
     padding: 8px 16px !important;
     margin: 8px 16px 12px !important;
@@ -167,8 +167,8 @@
     transition: all 0.2s !important;
   }
   .pagefind-ui__button:hover {
-    border-color: #00f0ff !important;
-    color: #00f0ff !important;
-    box-shadow: 0 0 8px rgba(0, 240, 255, 0.2) !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    box-shadow: 0 0 8px var(--accent) !important;
   }
 </style>

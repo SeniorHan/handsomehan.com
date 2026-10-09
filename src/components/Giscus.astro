@@ -17,3 +17,21 @@
     async
   ></script>
 </section>
+
+<script>
+  // 主题切换时同步 giscus（官方 postMessage API）
+  function syncGiscusTheme() {
+    const theme =
+      document.documentElement.dataset.theme === 'light' ? 'light' : 'dark_dimmed';
+    const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+    iframe?.contentWindow?.postMessage(
+      { giscus: { setConfig: { theme } } },
+      'https://giscus.app',
+    );
+  }
+  const observer = new MutationObserver(syncGiscusTheme);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
+</script>

@@ -1,0 +1,31 @@
+---
+// 三态主题切换按钮：light → dark → system 循环。
+// 图标显隐由 global.css 的 #theme-toggle[data-choice] 规则控制；
+// 交互逻辑由 Base.astro 底部打包脚本 initThemeToggle() 驱动。
+---
+
+<button
+  id="theme-toggle"
+  class="text-text-secondary hover:text-accent transition-colors p-1.5 rounded-md"
+  aria-label="切换主题"
+  data-choice="system"
+>
+  <span class="theme-icon-light" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path>
+      <path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
+    </svg>
+  </span>
+  <span class="theme-icon-dark" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+    </svg>
+  </span>
+  <span class="theme-icon-system" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="4" width="20" height="13" rx="2"></rect>
+      <path d="M8 21h8"></path><path d="M12 17v4"></path>
+    </svg>
+  </span>
+</button>

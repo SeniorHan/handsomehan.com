@@ -145,9 +145,27 @@
     color: var(--text-secondary) !important;
     font-size: 13px !important;
   }
-  mark.pagefind-ui__result-highlight {
+  .pagefind-ui__result mark,
+  .pagefind-ui__result-highlight {
     background: var(--bg-hover) !important;
     color: var(--accent) !important;
+  }
+  /* 兜底：覆盖 Pagefind 默认黄底黑字高亮（暗色下刺眼） */
+  #pagefind-search mark,
+  .pagefind-ui mark {
+    background: var(--bg-hover) !important;
+    color: var(--accent) !important;
+    border-radius: 2px !important;
+  }
+  /* Low5: 结果首帧文字不可见（渲染时机）——结果区显式声明颜色与可见性 */
+  .pagefind-ui__result,
+  .pagefind-ui__result * {
+    color: inherit;
+  }
+  .pagefind-ui__result-inner,
+  .pagefind-ui__result-title {
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   .pagefind-ui__message {
     color: var(--text-secondary) !important;

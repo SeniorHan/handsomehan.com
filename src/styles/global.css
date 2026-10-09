@@ -178,6 +178,14 @@
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
+/* 暗色下注释/标点等弱化 token 提亮：github-dark 的 #6a737d 对比度仅 4.10:1，
+   低于 WCAG AA 4.5:1；#8b949e（github-dark 默认 fg 次级色）对 #24292e 为 5.7:1 ✓ */
+[data-theme="dark"] .astro-code span[style*="#6a737d"],
+[data-theme="dark"] .astro-code span[style*="#6A737D"],
+[data-theme="dark"] .astro-code span[style*="rgb(106, 115, 125)"] {
+  color: #8b949e !important;
+}
+
 /* ── 主题切换按钮：按当前选择显示对应图标 ── */
 #theme-toggle .theme-icon-light,
 #theme-toggle .theme-icon-dark,
